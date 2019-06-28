@@ -1,9 +1,11 @@
 package com.example.flix;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder>{
+public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder> {
     ArrayList<Movie> movies;
     Config config;
     Context context;
@@ -45,7 +47,6 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder>{
         context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View movieView = inflater.inflate(R.layout.item_movie, viewGroup, false);
-
         return new ViewHolder(movieView);
     }
 
@@ -60,8 +61,10 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder>{
         String imageURL;
         if (isPortrait) {
             imageURL = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
+            viewHolder.tvPosterImage.setOnClickListener(view -> seeMovieDetails(i));
         } else {
             imageURL = config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath());
+            viewHolder.tvBackdropImage.setOnClickListener(view -> seeMovieDetails(i));
         }
 
         int placeholderId = isPortrait ? R.drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
@@ -95,5 +98,14 @@ public class movieAdapter extends RecyclerView.Adapter<movieAdapter.ViewHolder>{
             tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
         }
+    }
+
+    private void seeMovieDetails(int position) {
+        Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra("movieOverview", movies.get(position).getOverview());
+        intent.putExtra("movieTitle", movies.get(position).getTitle());
+        intent.putExtra("movieRating", movies.get(position).getVoteAverage());
+        intent.putExtra("moviePosterURL", config.getImageUrl(config.getBackdropSize(), movies.get(position).getBackdropPath()));
+        context.startActivity(intent);
     }
 }

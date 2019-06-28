@@ -6,14 +6,15 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/tvBackdropImage"
         android:layout_width="450dp"
         android:layout_height="300dp"
-        android:onClick="seeMovieDetails"
         android:scaleType="fitXY"
-        android:padding="0dp"
         app:layout_constraintEnd_toStartOf="@+id/tvOverview"
+        android:focusableInTouchMode="false"
+        android:clickable="true"
+        android:focusable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/flicks_backdrop_placeholder" />

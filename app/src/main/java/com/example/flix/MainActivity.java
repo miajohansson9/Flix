@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,18 +43,10 @@ public class MainActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         movies = new ArrayList<>();
         adapter = new movieAdapter(movies);
-        rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
+        rvMovies = findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
         getConfiguration();
-    }
-
-    public void seeMovieDetails(View view) {
-//        View parentRow = (View) view.getParent();
-//        ListView listView = (ListView) parentRow.getParent();
-//        final String position = Integer.toString(listView.getPositionForView(parentRow));
-//        System.out.println(position);
-        System.out.println("HERE");
     }
 
     private void getNowPlaying() {
@@ -74,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     logError("Failed to parse now playing movies", e, true);
                 }
-
             }
 
             @Override
