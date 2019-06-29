@@ -26,7 +26,7 @@ The following **stretch** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/5jAhdiw.gifv' alt='Video Walkthrough' />
+<img src='https://media.giphy.com/media/KDnDZBn1z6Y5GcKhn7/giphy.gif' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
